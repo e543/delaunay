@@ -11,17 +11,17 @@ public:
 		TestsRunner tr(ch);
 
 		tmList tml = setTests(ch);
-		tr.RunTests(1,tml);
+		tr.RunTests(1000000,tml);
 	}
 
 	tmList setTests(IMessage* rhmsg) {
 		tmList* curtml = new tmList();
-		curtml->push_back(TM(new Maur1(), rhmsg));
-		curtml->push_back(TM(new Maur2(), rhmsg));
-		curtml->push_back(TM(new Method3(), rhmsg));
-		curtml->push_back(TM(new Method4(), rhmsg));
-		curtml->push_back(TM(new Method5(), rhmsg));
-		curtml->push_back(TM(new Method6(), rhmsg));
+		curtml->push_back(new Maur1());
+		curtml->push_back(new Maur2());
+		curtml->push_back(new Method3());
+		curtml->push_back(new Method4());
+		curtml->push_back(new Method5());
+		curtml->push_back(new Method6());
 
 		return* curtml;
 	}

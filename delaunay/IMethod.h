@@ -6,16 +6,13 @@ struct IMethod
 {
 	MethodName method_name = UNDEF;
 	PointState result = Error;
-	IMessage* _msg;
 	PointState getState() {
 		return result;
 	};
 
 	IMethod() {};
 	virtual ~IMethod() {};
-	IL virtual PointState getResult(const  Vec3f&, const  Vec3f&, const Vec3f&, const Vec3f&, const Vec3f&) = 0;
-private:
-	IL virtual void Initialize() = 0;
+	IL virtual void getResult(PointState& , Vec3f& scenter, const  Vec3f&, const  Vec3f&, const Vec3f&, const Vec3f&, const Vec3f&) = 0;
 protected:
 	IL void calcResult(float val) {
 		if (val >= eps) {

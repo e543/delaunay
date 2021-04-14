@@ -7,5 +7,6 @@ enum MethodName {
 	_Method4,
 	_Method5,
 	_Method6,
+	_Method7
 };
 

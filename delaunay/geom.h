@@ -14,7 +14,7 @@
 #define Vec3f Vec3<float>
 #define AABB AABB<float>
 
-constexpr auto eps = 0.1;
+constexpr auto eps = 0.001;
 
 #define rF rand_float()
 
@@ -205,3 +205,5 @@ IL void CalcSphereBarCenterDot(Sphere& sphere, const Vec3f& a, const  Vec3f& b, 
 	}
 	sphere.radius = sqrtf((sphere.c - referencePt).dot(sphere.c - referencePt));
 }
+
+
