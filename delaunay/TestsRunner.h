@@ -30,12 +30,12 @@ class TestsRunner
 			{
 				Vec3f test_scenter;
 				Vec3f v1, v2, v3, v4, r5;
-				r5 = Vec3f(1, -2, -7);
+				r5 = Vec3f(rF, rF, rF);
 				while (checkCompl(v1, v2, v3, v4)) {
-					v1 = Vec3f(-1, 4, 0);
-					v2 = Vec3f(6, 1, 0);
-					v3 = Vec3f(5, 1, -2);
-					v4 = Vec3f(3, -1, 0);
+					v1 = Vec3f(rF, rF, rF);
+					v2 = Vec3f(rF, rF, rF);
+					v3 = Vec3f(rF, rF, rF);
+					v4 = Vec3f(rF, rF, rF);
 				}
 
 

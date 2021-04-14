@@ -14,7 +14,7 @@
 #define Vec3f Vec3<float>
 #define AABB AABB<float>
 
-constexpr auto eps = 0.001;
+constexpr auto eps = 0.005;
 
 #define rF rand_float()
 
