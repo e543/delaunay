@@ -281,7 +281,6 @@ IL PointState Method6::getResult(const Vec3f& v1, const Vec3f& v2, const Vec3f& 
 
 	Circle ccircle;
 	CalcCircleBarCenterDot(ccircle,v1,v2,v3);
-	_msg->sendMsg(std::to_string(ccircle.c.x) + " " + std::to_string(ccircle.c.y) + " " + std::to_string(ccircle.c.z));
 
 
 	return  result;
