@@ -238,7 +238,6 @@ IL PointState Method5::getResult(const Vec3f& v1, const Vec3f& v2, const Vec3f& 
 
 	Circle ccircle;
 	CalcCircleBarCenterDot(ccircle, v1, v2, v3);
-	_msg->sendMsg(std::to_string(ccircle.c.x) + " " + std::to_string(ccircle.c.y) + " " + std::to_string(ccircle.c.z));
 
 
 	Vec3f pd = projPointPlane(v1, v2, v3, v4);
@@ -247,7 +246,6 @@ IL PointState Method5::getResult(const Vec3f& v1, const Vec3f& v2, const Vec3f& 
 
 	Circle scircle;
 	CalcCircleBarCenterDot(scircle, S, T, v4);
-	_msg->sendMsg(std::to_string(scircle.c.x) + " " + std::to_string(scircle.c.y) + " " + std::to_string(scircle.c.z));
 	
 	float distant = r5.GetDistance(scircle.c);
 	calcResult(scircle.radius - distant);
