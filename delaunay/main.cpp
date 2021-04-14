@@ -1,4 +1,4 @@
-﻿#include "RunHelper.h";
+﻿#include "RunHelper.h"
 #undef max
 #undef min
 

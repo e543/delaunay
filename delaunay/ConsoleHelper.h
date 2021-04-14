@@ -15,8 +15,10 @@ public:
 	virtual std::string getMsg() const override;
 	virtual void Parting() const override;
 	virtual void showResult(MethodName methodname, PointState result, float time, Vec3f scenter);
+	virtual void showPoints(const Vec3f&, const Vec3f&, const Vec3f&, const Vec3f&, const Vec3f&);
 	void add_result(PointState);
 	void add_methodName(MethodName);
+	void showPoint(const Vec3f&);
 };
 
 
@@ -53,10 +55,20 @@ void ConsoleHelper::showResult(MethodName methodname, PointState result, float t
 		str += (to_str(time) + " sec" +
 			"\tx: " + to_str(scenter.x) +
 			"\ty: " + to_str(scenter.y) +
-			"\tz: " + to_str(scenter.z));
+			"\tz: " + to_str(scenter.z)); 
 	sendMsg(str);
 	str.clear();
 }
+
+void ConsoleHelper::showPoints(const Vec3f& v1, const Vec3f& v2, const Vec3f& v3, const Vec3f& v4, const Vec3f& v5){
+	showPoint(v1);
+	showPoint(v2);
+	showPoint(v3);
+	showPoint(v4);
+	showPoint(v5);
+}
+
+
 
 void ConsoleHelper::add_result(PointState result) {
 	
@@ -115,4 +127,8 @@ void ConsoleHelper::add_methodName(MethodName mn_res) {
 			break;
 		}
 	}
+}
+
+IL void ConsoleHelper::showPoint(const Vec3f& p) {
+	sendMsg("\tx:" + to_str(p.x) + "\ty:" + to_str(p.y) + "\tz:" + to_str(p.z));
 }

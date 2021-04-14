@@ -1,6 +1,5 @@
 #pragma once
 #include "TestsRunner.h"
-#define TM TestMethod
 
 class RunHelper
 {

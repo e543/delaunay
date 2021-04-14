@@ -51,6 +51,7 @@ class TestsRunner
 					tm.RunTest(result, test_scenter, v1, v2, v3, v4, r5);
 					result = Error;
 				}
+				_msg->showPoints(v1,v2,v3,v4,r5);
 
 			}
 			else _msg->sendMsg("N error");
