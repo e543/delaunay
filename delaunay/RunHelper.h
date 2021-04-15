@@ -10,7 +10,7 @@ public:
 		TestsRunner tr(ch);
 
 		tmList tml = setTests(ch);
-		tr.RunTests(1000000,tml);
+		tr.RunTests(100000,tml);
 	}
 
 	tmList setTests(IMessage* rhmsg) {
