@@ -16,7 +16,7 @@ public:
 	}
 	~Maur1() {
 	}
-	IL void getResult(PointState& res, Vec3f& scenter, const Vec3f& v1, const Vec3f& v2, const Vec3f& v3, const Vec3f& v4, const Vec3f& r5)
+	IL TestResult getResult(const Vec3f& v1, const Vec3f& v2, const Vec3f& v3, const Vec3f& v4, const Vec3f& r5)
 	{
 		Matrix55 mtr(
 			v1.x, v1.y, v1.z, v1.dot(v1), 1,
@@ -28,7 +28,8 @@ public:
 
 		auto det = mtr.Determinant();
 		calcResult(det);
-		res = result;
+		test_res.point_state = state_res;
+		return test_res;
 	}
 };
 
@@ -42,8 +43,9 @@ public:
 	}
 	~Maur2() {
 	}
-	IL void getResult(PointState& res, Vec3f& scenter, const Vec3f& v1, const Vec3f& v2, const Vec3f& v3, const Vec3f& v4, const Vec3f& r5)
+	IL TestResult getResult(const Vec3f& v1, const Vec3f& v2, const Vec3f& v3, const Vec3f& v4, const Vec3f& r5)
 	{
+
 		Matrix44 mtr(
 			v1.x - r5.x, v1.y - r5.y, v1.z - r5.z, v1.GetSquaredDistance(r5),
 			v2.x - r5.x, v2.y - r5.y, v2.z - r5.z, v2.GetSquaredDistance(r5),
@@ -53,7 +55,8 @@ public:
 
 		auto det = mtr.Determinant();
 		calcResult(det);
-		res = result;
+		test_res.point_state = state_res;
+		return test_res;
 	}
 };
 
@@ -68,9 +71,8 @@ public:
 	}
 	~Method3() {
 	}
-	IL void getResult(PointState& res, Vec3f& scenter, const Vec3f& v1, const Vec3f& v2, const Vec3f& v3, const Vec3f& v4, const Vec3f& r5)
+	IL TestResult getResult(const Vec3f& v1, const Vec3f& v2, const Vec3f& v3, const Vec3f& v4, const Vec3f& r5)
 	{
-
 
 		Matrix44 A(
 			v1.x, v1.y, v1.z, 1,
@@ -124,12 +126,13 @@ public:
 		rad = sqrtf(Dx * Dx + Dy * Dy + Dz * Dz - 4 * a * c) / (2 * fabs(a));
 
 		Vec3f cur_scenter(x0, y0, z0);
-		scenter = cur_scenter;
-
-		float distant = r5.GetDistance(scenter);
-
+		float distant = r5.GetDistance(cur_scenter);
 		calcResult(rad - distant);
-		res = result;
+
+		test_res.circumsphere.radius = rad;
+		test_res.circumsphere.c = cur_scenter;
+		test_res.point_state = state_res;
+		return test_res;
 	}
 };
 
@@ -145,7 +148,7 @@ public:
 	}
 	~Method4() {
 	}
-	IL void getResult(PointState& res, Vec3f& scenter, const Vec3f& v1, const Vec3f& v2, const Vec3f& v3, const Vec3f& v4, const Vec3f& r5)
+	IL TestResult getResult(const Vec3f& v1, const Vec3f& v2, const Vec3f& v3, const Vec3f& v4, const Vec3f& r5)
 	{
 		Vec3f ccenter = CalcCircleBarCenter(v1, v2, v3);
 		float rad = v1.GetDistance(ccenter);
@@ -155,14 +158,16 @@ public:
 		Vec3f S, T;
 		LineCircleIntrPoints(S, T, ccenter, rad, pd);
 
-		scenter = CalcCircleBarCenter(S, T, v4);
-
+		Vec3f scenter = CalcCircleBarCenter(S, T, v4);
 
 		float distant = r5.GetDistance(scenter);
 		rad = scenter.GetDistance(v4);
-		calcResult(rad - distant);
 
-		res = result;
+		calcResult(rad - distant);
+		test_res.circumsphere.radius = rad;
+		test_res.circumsphere.c = scenter;
+		test_res.point_state = state_res;
+		return test_res;
 	}
 };
 
@@ -178,7 +183,7 @@ public:
 	}
 	~Method5() {
 	}
-	IL void getResult(PointState& res, Vec3f& scenter, const Vec3f& v1, const Vec3f& v2, const Vec3f& v3, const Vec3f& v4, const Vec3f& r5)
+	IL TestResult getResult(const Vec3f& v1, const Vec3f& v2, const Vec3f& v3, const Vec3f& v4, const Vec3f& r5)
 	{
 		Circle ccircle;
 		CalcCircleBarCenterDot(ccircle, v1, v2, v3);
@@ -190,11 +195,15 @@ public:
 
 		Circle scircle;
 		CalcCircleBarCenterDot(scircle, S, T, v4);
-		scenter = scircle.c;
+		Vec3f scenter = scircle.c;
 
 		float distant = r5.GetDistance(scircle.c);
+
 		calcResult(scircle.radius - distant);
-		res = result;
+		test_res.circumsphere.radius = scircle.radius;
+		test_res.circumsphere.c = scenter;
+		test_res.point_state = state_res;
+		return test_res;
 	}
 };
 
@@ -211,10 +220,11 @@ public:
 	~Method6() {
 	}
 
-	IL void getResult(PointState& res, Vec3f& scenter, const Vec3f& v1, const Vec3f& v2, const Vec3f& v3, const Vec3f& v4, const Vec3f& r5)
+	IL TestResult getResult(const Vec3f& v1, const Vec3f& v2, const Vec3f& v3, const Vec3f& v4, const Vec3f& r5)
 	{
 		Circle ccircle;
 		CalcCircleBarCenterDot(ccircle, v1, v2, v3);
+		return test_res;
 	}
 };
 

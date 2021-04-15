@@ -1,28 +1,31 @@
 #pragma once
 #include "geom.h"
-#include "IMessage.h"
+#include "MethodName.h"
+#include "PointState.h"
+#include "ITest.h"
 
 struct IMethod
 {
 	MethodName method_name = UNDEF;
-	PointState result = Error;
+	PointState state_res = Error;
+	TestResult test_res;
 	PointState getState() {
-		return result;
+		return state_res;
 	};
 
 	IMethod() {};
 	virtual ~IMethod() {};
-	IL virtual void getResult(PointState& , Vec3f& scenter, const  Vec3f&, const  Vec3f&, const Vec3f&, const Vec3f&, const Vec3f&) = 0;
+	IL virtual TestResult getResult(const  Vec3f&, const  Vec3f&, const Vec3f&, const Vec3f&, const Vec3f&) = 0;
 protected:
 	IL void calcResult(float val) {
 		if (val >= eps) {
-			result = InSphere;
+			state_res = InSphere;
 		}
 		else if (val < -eps) {
-			result = OutOfSphere;
+			state_res = OutOfSphere;
 		}
 		else {
-			result = OnSphere;
+			state_res = OnSphere;
 		}
 	};
 	MethodName getName() {

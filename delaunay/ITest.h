@@ -1,6 +1,13 @@
 #pragma once
-struct ITest
-{
+#include "geom.h"
+#include "PointState.h"
+
+struct TestResult {
+	Sphere circumsphere;
+	PointState point_state;
+};
+
+struct ITest{
 	virtual ~ITest() {}
-	virtual void RunTest(PointState&, Vec3f& srad, const  Vec3f&, const  Vec3f&, const Vec3f&, const Vec3f&, const Vec3f&) const = 0;
+	virtual TestResult RunTest(const  Vec3f&, const  Vec3f&, const Vec3f&, const Vec3f&, const Vec3f&) const = 0;
 };

@@ -28,6 +28,7 @@ class TestsRunner
 
 			if (n > 0)
 			{
+				TestResult test_result;
 				Vec3f test_scenter;
 				Vec3f v1, v2, v3, v4, r5;
 				r5 = Vec3f(rF, rF, rF);
@@ -39,17 +40,15 @@ class TestsRunner
 				}
 
 
-				for (TestMethod tm : test_methods) {
+				for (TestMethod test_method : test_methods) {
 
 					double t1 = getCPUTime();
 					for (size_t N = n; --N > 0;) {
-						tm.RunTest(result, test_scenter, v1, v2, v3, v4, r5);
+						test_result = test_method.RunTest(v1, v2, v3, v4, r5);
 					};
 					double t2 = getCPUTime();
 					float test_time = t2 - t1;
-					_msg->showResult(tm.getName(), result, test_time, test_scenter);
-					tm.RunTest(result, test_scenter, v1, v2, v3, v4, r5);
-					result = Error;
+					_msg->showResult(test_method.getName(), test_result.point_state, test_time, test_result.circumsphere.c);
 				}
 
 			}
