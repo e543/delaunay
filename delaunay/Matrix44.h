@@ -96,7 +96,7 @@ template<typename F> struct Matrix44
 		Transpose(Matrix44(*this));
 	}
 
-	F DeterminantInvert(Matrix44* pInv = 0) const
+	IL F DeterminantInvert(Matrix44* pInv = 0) const
 	{
 		F tmp[16];
 

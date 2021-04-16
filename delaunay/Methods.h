@@ -114,16 +114,17 @@ public:
 		auto a = A.Determinant();
 		auto c = C.Determinant();
 
-		float Dx, Dy, Dz, x0, y0, z0, rad;
-		Dx = mDx.Determinant();
-		Dy = -mDy.Determinant();
-		Dz = mDz.Determinant();
+		const auto Dx = mDx.Determinant();
+		const auto Dy = -mDy.Determinant();
+		const auto Dz = mDz.Determinant();
 
-		x0 = Dx / (2 * a);
-		y0 = Dy / (2 * a);
-		z0 = Dz / (2 * a);
+		const float ha = 1 / (2 * a);
 
-		rad = sqrtf(Dx * Dx + Dy * Dy + Dz * Dz - 4 * a * c) / (2 * fabs(a));
+		const auto x0 = Dx * ha;
+		const auto y0 = Dy * ha;
+		const auto z0 = Dz * ha;
+
+		const auto rad = sqrtf(Dx * Dx + Dy * Dy + Dz * Dz - 4 * a * c) * ha;
 
 		Vec3f cur_scenter(x0, y0, z0);
 		float distant = r5.GetDistance(cur_scenter);
@@ -160,7 +161,7 @@ public:
 
 		Vec3f scenter = CalcCircleBarCenter(S, T, v4);
 
-		float distant = r5.GetDistance(scenter);
+		const float distant = r5.GetDistance(scenter);
 		rad = scenter.GetDistance(v4);
 
 		calcResult(rad - distant);
@@ -197,7 +198,7 @@ public:
 		CalcCircleBarCenterDot(scircle, S, T, v4);
 		Vec3f scenter = scircle.c;
 
-		float distant = r5.GetDistance(scircle.c);
+		const auto distant = r5.GetDistance(scircle.c);
 
 		calcResult(scircle.radius - distant);
 		test_res.circumsphere.radius = scircle.radius;
